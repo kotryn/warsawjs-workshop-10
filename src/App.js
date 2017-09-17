@@ -21,6 +21,12 @@ class App extends Component {
     addItem = (name) => {
         this.setState({transactionList: this.state.transactionList.concat(name)})
     };
+    changeItem = (id, name) => {
+        console.log(id);
+        var {transactionList} = this.state;
+        transactionList[id] = name;
+        this.setState({transactionList: transactionList})
+    };
   render() {
         const {name} = this.props;
         const {transactionList} = this.state;
@@ -37,7 +43,7 @@ class App extends Component {
 
           <div><Counter name="Increment" func={this.increment}/> <Counter name="Decrement" func={this.decrement} /></div>
           <div><TransactionForm  addItem={this.addItem}/></div>
-          <div><TransactionList transactionList={transactionList} deleteItem={this.deleteItem} /></div>
+          <div><TransactionList transactionList={transactionList} deleteItem={this.deleteItem} changeItem={this.changeItem} /></div>
 
       </div>
     );
