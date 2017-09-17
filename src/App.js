@@ -10,7 +10,9 @@ class App extends Component {
         super(props);
         this.state={
             counter: 0,
-            transactionList: ['a', 'b', 'c', 'd', 'e']
+            transactionList: ['a', 'b', 'c', 'd', 'e'],
+            categoryList: ['test'],
+            isCategoryList: false
         }
     }
     increment = () => {this.setState({counter: this.state.counter+1})};
@@ -19,13 +21,14 @@ class App extends Component {
         this.setState({transactionList: this.state.transactionList.filter((item, index) => { return id!==index })})
     };
     addItem = (name) => {
-        this.setState({transactionList: this.state.transactionList.concat(name)})
+        !/^ *$/.test(name) && this.setState({transactionList: this.state.transactionList.concat(name)});
     };
     changeItem = (id, name) => {
-        console.log(id);
-        var {transactionList} = this.state;
-        transactionList[id] = name;
-        this.setState({transactionList: transactionList})
+        if(!/^ *$/.test(name)) {
+            const {transactionList} = this.state;
+            transactionList[id] = name;
+            this.setState({transactionList: transactionList})
+        }
     };
   render() {
         const {name} = this.props;

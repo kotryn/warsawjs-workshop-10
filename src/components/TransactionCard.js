@@ -24,8 +24,12 @@ export default class TransactionCard extends React.Component{
         changeItem(index, this.state.name);
     }
 
-    change = (e) =>{
+    change = (e) => {
         this.setState({name: e.target.value});
+    }
+
+    refresh = () => {
+        this.setState({name: this.props.element});
     }
 
 
@@ -33,7 +37,7 @@ export default class TransactionCard extends React.Component{
     render(){
         var {element} = this.props;
         const {edit} = this.state;
-        const component = edit ? <input autoFocus type="string" id="input" value={this.state.name} onKeyPress={this.done} onChange={this.change} onBlur={this.handleSubmit}/> : <div>{element}</div>;
+        const component = edit ? <input autoFocus type="string" id="input" value={this.state.name} onFocus={this.refresh} onKeyPress={this.done} onChange={this.change} onBlur={this.handleSubmit}/> : <div>{element}</div>;
 
         return <button className="text" onClick={()=>this.editItem()}>{component}</button>
     }
